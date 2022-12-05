@@ -34,5 +34,5 @@ export const confirmTransaction = (page: Page, getSingedIn: GetSingedIn, version
     await clickOnButton(page, 'Save');
   }
 
-  await clickOnButton(page, 'Confirm');
+  await clickOnButton(page, '[data-testid="page-container-footer-next"]');
 };

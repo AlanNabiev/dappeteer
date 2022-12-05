@@ -9,6 +9,7 @@ import { confirmTransaction } from './confirmTransaction';
 import { deleteAccount, getTokenBalance, deleteNetwork } from './helpers';
 import { importPk } from './importPk';
 import { lock } from './lock';
+import { approveAndAddNetwork } from './next';
 import { sign } from './sign';
 import { switchAccount } from './switchAccount';
 import { switchNetwork } from './switchNetwork';
@@ -42,6 +43,7 @@ export const getMetamask = async (page: Page, version?: string): Promise<Dappete
     switchNetwork: switchNetwork(page, version),
     unlock: unlock(page, setSignedIn, getSingedIn, version),
     addToken: addToken(page),
+    approveAndAddNetwork: approveAndAddNetwork(page, version),
     helpers: {
       getTokenBalance: getTokenBalance(page),
       deleteAccount: deleteAccount(page),

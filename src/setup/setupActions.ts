@@ -7,6 +7,7 @@ import {
   clickOnSettingsSwitch,
   openNetworkDropdown,
   typeOnInputField,
+  typeOnInputFieldBySelector,
 } from '../helpers';
 import { MetamaskOptions } from '../types';
 
@@ -19,7 +20,11 @@ export async function showTestNets(metamaskPage: Page): Promise<void> {
 }
 
 export async function confirmWelcomeScreen(metamaskPage: Page): Promise<void> {
-  await clickOnButton(metamaskPage, 'Get Started');
+  await clickOnButton(metamaskPage, '.first-time-flow__button');
+}
+
+export async function declineAnalytics(metaMaskPage) {
+    await clickOnButton(metaMaskPage, '[data-testid="page-container-footer-cancel"]');
 }
 
 export async function importAccount(
@@ -29,21 +34,20 @@ export async function importAccount(
     password = 'password1234',
   }: MetamaskOptions,
 ): Promise<void> {
-  await clickOnButton(metamaskPage, 'Import wallet');
-  await clickOnButton(metamaskPage, 'I Agree');
+  await clickOnButton(metamaskPage, '[data-testid="import-wallet-button"]');
 
   for (const [index, seedPart] of seed.split(' ').entries())
     await typeOnInputField(metamaskPage, `${index + 1}.`, seedPart);
 
-  await typeOnInputField(metamaskPage, 'New password', password);
-  await typeOnInputField(metamaskPage, 'Confirm password', password);
+    await typeOnInputFieldBySelector(metamaskPage, '#password', password)
+    await typeOnInputFieldBySelector(metamaskPage, '#confirm-password', password)
 
   // select checkbox "I have read and agree to the"
   const acceptTerms = await metamaskPage.waitForSelector('.create-new-vault__terms-label');
   await acceptTerms.click();
 
-  await clickOnButton(metamaskPage, 'Import');
-  await clickOnButton(metamaskPage, 'All Done');
+  await clickOnButton(metamaskPage, '.create-new-vault__submit-button');
+  await clickOnButton(metamaskPage, '[data-testid="EOF-complete-button"]');
 }
 
 export const closePopup = async (page: Page): Promise<void> => {

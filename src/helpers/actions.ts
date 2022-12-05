@@ -29,8 +29,8 @@ export const clickOnElement = async (page: Page, text: string, type?: string): P
   await element.click();
 };
 
-export const clickOnButton = async (page: Page, text: string): Promise<void> => {
-  const button = await getElementByContent(page, text, 'button');
+export const clickOnButton = async (page: Page, selector: string): Promise<void> => {
+  const button = await page.waitForSelector(selector);
   await button.click();
 };
 
@@ -72,3 +72,11 @@ export const typeOnInputField = async (
   await input.type(text);
   return true;
 };
+
+export const typeOnInputFieldBySelector = async (
+  page: Page,
+  selector: string,
+  text
+) => {
+  await page.$eval(selector, el => el.value = text);
+}

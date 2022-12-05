@@ -51,6 +51,7 @@ export type Dappeteer = {
   importPK: (pk: string) => Promise<void>;
   switchAccount: (accountNumber: number) => Promise<void>;
   switchNetwork: (network: string) => Promise<void>;
+  approveAndAddNetwork: (network: string) => Promise<void>;
   confirmTransaction: (options?: TransactionOptions) => Promise<void>;
   sign: () => Promise<void>;
   approve: () => Promise<void>;
