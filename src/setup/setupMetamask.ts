@@ -9,7 +9,12 @@ import { closePopup, confirmWelcomeScreen, declineAnalytics, importAccount } fro
  * Setup MetaMask with base account
  * */
 type Step<Options> = (page: Page, options?: Options) => void;
-const defaultMetamaskSteps: Step<MetamaskOptions>[] = [confirmWelcomeScreen,declineAnalytics, importAccount, closePopup];
+const defaultMetamaskSteps: Step<MetamaskOptions>[] = [
+  confirmWelcomeScreen,
+  declineAnalytics,
+  importAccount,
+  closePopup,
+];
 
 export async function setupMetamask<Options = MetamaskOptions>(
   browser: Browser,
