@@ -74,7 +74,13 @@ export const typeOnInputField = async (
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
-export const typeOnInputFieldBySelector = async (page: Page, selector: string, text: string) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await page.$eval(selector, (el: any) => (el.value = text));
+export const typeOnInputFieldBySelector = async (page: Page, selector: string, text: string): Promise<void> => {
+  let input;
+  try {
+    input = await page.waitForSelector(selector);
+  } catch (e) {
+    throw new Error(e);
+  }
+
+  await input.type(text);
 };

@@ -23,8 +23,8 @@ export async function confirmWelcomeScreen(metamaskPage: Page): Promise<void> {
   await clickOnButton(metamaskPage, '.first-time-flow__button');
 }
 
-export async function declineAnalytics(metaMaskPage) {
-    await clickOnButton(metaMaskPage, '[data-testid="page-container-footer-cancel"]');
+export async function declineAnalytics(metamaskPage: Page): Promise<void> {
+  await clickOnButton(metamaskPage, '[data-testid="page-container-footer-cancel"]');
 }
 
 export async function importAccount(
@@ -39,8 +39,8 @@ export async function importAccount(
   for (const [index, seedPart] of seed.split(' ').entries())
     await typeOnInputField(metamaskPage, `${index + 1}.`, seedPart);
 
-    await typeOnInputFieldBySelector(metamaskPage, '#password', password)
-    await typeOnInputFieldBySelector(metamaskPage, '#confirm-password', password)
+  await typeOnInputFieldBySelector(metamaskPage, '#password', password);
+  await typeOnInputFieldBySelector(metamaskPage, '#confirm-password', password);
 
   // select checkbox "I have read and agree to the"
   const acceptTerms = await metamaskPage.waitForSelector('.create-new-vault__terms-label');
